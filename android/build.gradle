@@ -7,10 +7,12 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         ndkVersion = "21.4.7075529"
+        
     }
     repositories {
         google()
         mavenCentral()
+        
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.2.2")
@@ -36,3 +38,4 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
