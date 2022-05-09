@@ -36,9 +36,12 @@ export default class App extends Component {
   componentWillUnmount() {
     geolocation.clearWatch(this.locationWatchId);
   }
+  //for hiding the keyboard
   hideKeyboard() {
     Keyboard.dismiss();
   }
+
+  //fetching user position using geolocation
   getUserPosition() {
     this.setState({hasMapPermission: true});
 
@@ -56,6 +59,7 @@ export default class App extends Component {
       },
     );
   }
+  //fetching the destination coords
   async showDirectionOnMap(placeId) {
     const {userLatitude, userLongitude} = this.state;
     try {
@@ -63,10 +67,11 @@ export default class App extends Component {
         `https://maps.googleapis.com/maps/api/directions/json?origin=${userLatitude},${userLongitude}&destination=place_id:${placeId}&key=AIzaSyBJfSotOtbe2zSxJNiFEHdZmQJ5pClHrO4`,
       );
 
+      //here we get the points
       const points = PolyLine.decode(
         result.data.routes[0].overview_polyline.points,
       );
-
+      //mapping those points
       const latLng = points.map(point => ({
         latitude: point[0],
         longitude: point[1],
@@ -81,6 +86,8 @@ export default class App extends Component {
       console.error(err);
     }
   }
+
+  //location finding
   async requestFineLocation() {
     try {
       if (Platform.OS === 'android') {
