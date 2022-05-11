@@ -1,8 +1,71 @@
 import React from 'react';
-import {StatusBar, View, Text, Image} from 'react-native';
+import {StatusBar, View, Text, Image, FlatList} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 const Instagram = () => {
+  const stories = [
+    {
+      id: 1,
+      image: require('../Components/src/assets/me.png'),
+    },
+    {
+      id: 2,
+      image: require('../Components/src/assets/download.jpg'),
+    },
+  ];
+
+  const renderStories = ({item, index}) => {
+    return (
+      /*  <LinearGradient
+        start={{x: 0.0, y: 1.0}}
+        end={{x: 1.0, y: 1.0}}
+        colors={['#CA1D7E', '#E35157', '#F2703f']}
+        style={{
+          height: 82,
+          width: 82,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 82 / 2,
+        }}>
+        <Image
+          source={{uri: item.image}}
+          style={{
+            width: 75,
+            height: 75,
+            borderRadius: 75 / 2,
+            alignSelf: 'center',
+            borderColor: '#fff',
+            borderWidth: 3,
+          }}
+        />
+      </LinearGradient> */
+      <LinearGradient
+        colors={['#CA1D7E', '#E35157', '#F2703F']}
+        start={{x: 0.0, y: 1.0}}
+        end={{x: 1.0, y: 1.0}}
+        style={{
+          height: 82,
+          width: 82,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 82 / 2,
+          marginLeft: 10,
+        }}>
+        <Image
+          source={item.image}
+          style={{
+            width: 75,
+            height: 75,
+            borderRadius: 75 / 2,
+            padding: 20,
+          }}
+        />
+      </LinearGradient>
+    );
+  };
   return (
     <>
+      {/*  header */}
+
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <StatusBar backgroundColor="#000" barStyle="Light-content" />
         <View
@@ -12,14 +75,20 @@ const Instagram = () => {
             justifyContent: 'space-between',
             padding: 20,
           }}>
-          <Text
+          {/* <Text
             style={{
               color: 'black',
               fontSize: 30,
-              fontFamily: 'verdana',
+              fontFamily: '',
+              fontWeight: 'bold',
             }}>
             Instagram
-          </Text>
+          </Text> */}
+          <Image
+            source={require('../Components/src/assets/insta2.png')}
+            style={{width: 30, height: 30}}
+          />
+
           <View
             style={{
               display: 'flex',
@@ -39,10 +108,23 @@ const Instagram = () => {
             />
           </View>
         </View>
-        <View style={{backgroundColor: 'white', padding: 10}}></View>
+        <View style={{flexDirection: 'row'}}>
+          <FlatList
+            data={stories}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            showsVerticalScrollIndicator={false}
+            renderItem={renderStories}
+          />
+        </View>
         <View style={{backgroundColor: 'white', flex: 1, padding: 20}}></View>
 
         {/* //footer// */}
+
         <View
           style={{
             backgroundColor: 'white',
